@@ -1,24 +1,27 @@
 from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import pandas as pd
 
 
 def plot_loss_history(history, save=False):
+    plt.figure(1)
     plt.plot(history)
     plt.axis([-5, len(history) + 10, min(history) - 0.001, max(history) + 0.001])
     plt.xlabel('Epochs')
     plt.ylabel('MSE')
     if save:
-        plt.savefig('loss_history.png')
+        plt.savefig('figures/loss_history.png')
     else:
-        plt.show()
+        plt.show(block=False)
 
 
 def plot_regression(x, y, lr, save=False):
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
+    fig = plt.figure(2)
+    plt.title('Hyperplane, regression')
+    ax = Axes3D(fig)
     ax.scatter(x[:,0], x[:,1], y)
-    print('Scattered data')
+    #  print('Scattered data')
 
     x_surf = np.arange(0, 1, 0.001 * 25)
     y_surf = np.arange(0, 1, 0.001 * 25)
@@ -41,6 +44,6 @@ def plot_regression(x, y, lr, save=False):
     #  print('# Done plotting hyperplane')
 
     if save:
-        plt.savefig('regression.png')
+        plt.savefig('figures/regression.png')
     else:
-        plt.show()
+        plt.show(block=False)

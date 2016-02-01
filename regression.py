@@ -3,8 +3,8 @@ from read_csv import read_csv
 
 #  Basic configuration for LinearRegression-object.
 BASIC_CONFIG = {
-    'learning_rate': 0.1,
-    'bias': 0,
+    'learning_rate': 0.5,
+    'bias': 1,
     'num_of_epochs': 1500,
     'convergence_threshold': 1e-06
 }
@@ -36,10 +36,10 @@ class LinearRegression(object):
         :return: adjusted weights, adjusted bias, and the history of the loss function
         """
         n, feature_count = len(y_params), x_params.shape[1]
-        theta, bias = np.random.uniform(size=feature_count), self._config['bias']
+        theta, bias = np.random.uniform(size=feature_count, low=.00001), self._config['bias']
         loss_history = []
         converged = False
-        print('# Initial weights: W%s\n' % theta)
+        print('# Initial weights and bias: W%s B: %s\n' % (theta, bias))
 
         previous_prediction = self.cost(x_params, y_params, theta, bias)
 
@@ -135,5 +135,5 @@ if __name__ == "__main__":
 
     print('# Error: %s / %s (training/test)' % (cost_training, cost_test))
 
-    plot_loss_history(loss_history)
-    plot_regression(*training_data, lr)
+    plot_loss_history(loss_history, save=True)
+    plot_regression(*training_data, lr, save=True)

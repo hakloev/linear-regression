@@ -1,2 +1,4 @@
 .idea/
 __pycache__/
+figures/loss_*.png
+figures/regression.png
